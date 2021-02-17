@@ -11,12 +11,27 @@ import UIKit
 class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        
+        titleLabel.text = ""
+        let title = "⚡️FlashChat"
+        for (index, char) in title.enumerated() {
+            Timer.scheduledTimer(withTimeInterval: 0.1*Double(index), repeats: false) { (timer) in
+                self.titleLabel.text?.append(char)
+            }
+        }
     }
     
-
 }
